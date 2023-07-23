@@ -78,17 +78,185 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Register</title>
     <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  
+    
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline-color: #a5b4fc;
+  
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  /* background: linear-gradient(to right, #654ea3, #eaafc8); */
+}
+
+p {
+  font-size: 17px;
+  color: #2691d9;
+}
+
+.signup-form {
+  width: 480px;
+  padding: 32px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 2px 4px 8px #2691d9;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 48px;
+}
+
+.header h1 {
+  font-weight: bolder;
+  font-size: 28px;
+  color: #2691d9;
+  
+}
+
+.input {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input input {
+  width: 100%;
+  border: none;
+  padding: 8px 40px;
+  border-radius: 4px;
+  background-color: #f3f4f6;
+  color:#2691d9;
+  font-size: 16px;
+}
+
+.input input::placeholder {
+  color: #2691d9;
+}
+
+.input i {
+  top: 50%;
+  width: 36px;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #2691d9;
+  font-size: 16px;
+}
+
+.signup-btn {
+  width: 100%;
+  border: none;
+  padding: 8px 0;
+  margin: 24px 0;
+  border-radius: 20px;
+  background-color: #2691d9;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-btn:active {
+  background-color: #4f46e5;
+  transition: all 0.3s ease;
+}
+
+.social-icons i {
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  margin: 24px 8px 48px 8px;
+  background-color: gray;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+i.fa-facebook-f {
+  background-color: #3b5998;
+}
+
+i.fa-twitter {
+  background-color: #1da1f2;
+}
+
+i.fa-google {
+  background-color: #dd4b39;
+}
+
+a {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+</style>
+
+
   </head>
   <body>
     <h1 class="text-center">Student Register Page</h1>
 
-    <p style = "color: red">
+    <!-- <p style = "color: red">
       
+      <?php
+      // if (isset($error)){
+      //   if($error != ''){
+      //     echo '*';
+      //     echo  $error;
+      //   }
+      // }
+      ?>
+    </p>
+    <p style = "color: green">
+      
+      <?php
+      // if (isset($success)){
+      //   if($success != ''){
+      //   echo '*';
+      //   echo $success;
+      //   }
+      // } 
+      ?>
+    </p> -->
+
+  <div class="signup-form">
+  <div class="container">
+    <div class="header">
+      <h1 style="background-color: white;">Create an Account</h1>
+    </div>
+    <form method="post" action="register.php">
+      <div class="input">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" placeholder="Register Number" name="regno" value = "<?php if(isset($error)){echo $rno;}?>"/>
+      </div>
+      <div class="input">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" placeholder="Email Address" name="email" value = "<?php if(isset($error)){echo $email;}?>"/>
+      </div>
+      <div class="input">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" placeholder="Password" name="pwd"/>
+      </div>
+      <div class="input">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" placeholder="Confirm Password" name="cpwd"/>
+      </div>
+      
+      <p style = "color: red">
       <?php
       if (isset($error)){
         if($error != ''){
-          echo '*';
+          echo '* ';
           echo  $error;
         }
       }
@@ -105,8 +273,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       }
       ?>
     </p>
+      <input class="signup-btn" style="background-color: #2691d9;" type="submit" value="SIGN UP" />
+    </form>
+    <!-- <p>Or sign up with</p>
+    <div class="social-icons">
+      <i class="fa-brands fa-facebook-f"></i>
+      <i class="fa-brands fa-twitter"></i>
+      <i class="fa-brands fa-google"></i>
+    </div> -->
 
-    <div class="container mt-5">
+    
+    <p>Already have an account? <a href="./login.php">sign in</a></p>
+  </div>
+</div>
+
+    <!-- <div class="container mt-5">
     <form method="post" action="register.php">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Register Number</label>
@@ -126,8 +307,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
       <button type="submit" class="btn btn-primary w-100">Register</button>
     </form>
-    Already have an account? <a href="../student/login.php">Login now</a>
+    Already have an account? <a href="../student/login.php">Login now</a> -->
 
   </body>
 </html>
-
