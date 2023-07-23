@@ -3,6 +3,10 @@
 session_start();
 include "../connect.php";
 
+if(!isset($_SESSION['regno'])){
+    header("../student/login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,14 +36,6 @@ include "../connect.php";
 </head>
 <body>
 
-<?php
-if(!isset($_SESSION['regno'])){
-    header("../student/login");
-}
-else{
-?>
-
-
 <h1 class="text-center text-success mt-5">Welcome
     <?php echo $_SESSION['regno']; ?>
    </h1>
@@ -55,7 +51,8 @@ else{
             <option value="abc">abc</option>   
         </select>
     </div>
-
+    
+    <form action="" method="post"> 
     <div class="container">
         <table class="table">
             <thead>
@@ -83,8 +80,9 @@ else{
                 ?>    
             </tbody>
         </table>
-        <a href="../student/logout.php">Logout</a>
+        <a href="../student/home.php">home</a>
     </div>
+    </form>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -112,7 +110,41 @@ else{
 
 
     <?php
+
+    if (isset($_POST['select']))  {
+
+    $rno = $_SESSION['regno'];
+    $gid = $_POST['gid'];
+    $sql = "SELECT `name`, `phoneno`, `studycentre`, `course`, `specialization` FROM `student` WHERE `regno`='$rno'";
+
+    $res = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_assoc($res);
+
+    $name = $row['name'];
+    $phoneno = $row['phoneno'];
+    $studycentre = $row['studycentre'];
+    $course = $row['course'];
+    $specialization = $row['specialization'];
+
+    
+    $query = "INSERT INTO `guideselection`(`regno`, `name`, `phoneno`, `studycentre`, `course`, `specialization`, `gid`, `status`) VALUES ('$rno','$name','$phoneno','$studycentre','$course','$specialization','$gid','Pending')";
+
+    $sub = mysqli_query($conn,$query);
+        
+    if($sub>0){
+
+      echo "your request is  under process! ";
+
     }
+    else
+    {
+
+      echo "something went wrong ! ";
+    }
+
+   
+  } 
+
     ?>
 </body>
 </html>

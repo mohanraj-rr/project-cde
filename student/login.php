@@ -48,12 +48,34 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Student Login</title>
     <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/header.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/frontStyle.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"> -->
   </head>
   <body>
-    <h1 class="text-center">Student Login Page</h1>
-
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="../index.html">CDE Project</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="../index.html">SERVICE</a></li>
+            <li><a href="../index.html">CONTACT</a></li>
+            <li><a href="../index.html">ABOUTUS</a></li>
+        </ul>
+        </div>
+    </div>
+    </nav>
     
     <!-- <p style = "color: green">
       
@@ -97,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <br/>
         <br/>
         <div class="sigunup_link">
-          Not a member?<a href="./register.php" style="text-decoration:none;">Signup</a>
+          Not a member?<a href="./newregister.php" style="text-decoration:none;">Signup</a>
         </div>
         <br/>
       </form>
