@@ -48,7 +48,7 @@ if(!isset($_SESSION['regno'])){
             <option value="College of Engineering, Guindy">College of Engineering, Guindy</option>
             <option value="Madras Institute of Technology, Chromepet">Madras Institute of Technology, Chrompet</option>
             <option value="Center of Distance Education, Guindy">Center of Distance Education, Guindy</option>
-            <option value="abc">abc</option>   
+            <option value="Alagappa College of Technology, Guindy">Alagappa College of Technology, Guindy</option>   
         </select>
     </div>
     
