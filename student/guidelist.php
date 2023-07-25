@@ -4,8 +4,42 @@ session_start();
 include "../connect.php";
 
 if(!isset($_SESSION['regno'])){
-    header("../student/login.php");
+    header("location:login.php");
 }
+
+$regno = $_SESSION['regno'];
+
+$query = "SELECT * FROM `guideselection` WHERE `regno` = '$regno'";
+
+$res = mysqli_query($conn, $query);
+
+$val = mysqli_num_rows($res);
+
+if($val>0){
+    $sql = "SELECT `status` FROM `guideselection` WHERE `regno` = '$regno'";
+
+    $res = mysqli_query($conn, $sql);
+
+    $status = mysqli_fetch_array($res);
+
+    $check = $status["status"];
+
+    if($check == "Approved"){
+        header("location:./approved.php");
+        // echo '<script>alert("Your request is approved!")</script>';
+    }
+    else if($check == "Pending"){
+        header("location:./pending.php");
+    }
+    else if($check == "Rejected"){
+        //echo "You are rejected select again.";
+        echo '<script>alert("Your request is Rejected! Select a new Guide")</script>';
+        $sql = "DELETE FROM `guideselection` WHERE `regno` = '$regno' AND `status` = '$check'";
+        $res = mysqli_query($conn,$sql);
+
+    }
+}
+
 
 ?>
 
@@ -55,13 +89,38 @@ if(!isset($_SESSION['regno'])){
     color: white;
     }
 
+    .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    }
+
+    .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+    }
+
+    .button1:hover {
+    background-color: #4CAF50;
+    color: white;
+    }
+
   </style>
 </head>
 <body>
 
-<h1 class="text-center text-success mt-5">Welcome
+    <h1 class="text-center text-success mt-5">Welcome
     <?php echo $_SESSION['regno']; ?>
-   </h1>
+    </h1>
 
 
     <div id="filter">
@@ -99,8 +158,7 @@ if(!isset($_SESSION['regno'])){
                 </tr>
                 <?php
                 }
-
-                ?>    
+                ?>
             </tbody>
         </table>
         <a href="../student/home.php">home</a>
@@ -154,19 +212,18 @@ if(!isset($_SESSION['regno'])){
 
     $sub = mysqli_query($conn,$query);
         
-    if($sub>0){
+        if($sub>0){
 
-      echo "your request is  under process! ";
+        echo "your request is  under process! ";
+        echo "<script>window.location.href='home.php';</script>";  
 
-    }
-    else
-    {
+        }
+        else
+        {
 
-      echo "something went wrong ! ";
-    }
-
-   
-  } 
+        echo "something went wrong ! ";
+        }   
+    } 
 
     ?>
 </body>

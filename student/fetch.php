@@ -43,7 +43,8 @@ if(isset($_POST['request'])){
             <td><?php echo $row['name']?></td>
             <td><?php echo $row['designation']?></td>
             <td><?php echo $row['college']?></td>
-            <td><button type="submit" name="select">Select</button></td>
+            <td><button class="button button1" name="select" type="submit">SELECT</button></td>
+            <!-- <td><button type="submit" name="select">Select</button></td> -->
         </tr>
         <?php    
         }
