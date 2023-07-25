@@ -12,7 +12,7 @@ if(!isset($_SESSION['regno'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Guide List</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstap.min.css">
@@ -32,6 +32,29 @@ if(!isset($_SESSION['regno'])){
         margin-top: 2%;
         margin-bottom: 2%;
     }
+    #list {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    #list td, #list th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+
+    #list tr:nth-child(even){background-color: #f2f2f2;}
+
+    #list tr:hover {background-color: #ddd;}
+
+    #list th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: blue;
+    color: white;
+    }
+
   </style>
 </head>
 <body>
@@ -54,7 +77,7 @@ if(!isset($_SESSION['regno'])){
     
     <form action="" method="post"> 
     <div class="container">
-        <table class="table">
+        <table id="list" class="table">
             <thead>
                 <tr>
                     <th>Guide Name</th>

@@ -41,20 +41,27 @@ if(!isset($_SESSION['regno'])){
                 <a href="#">Project Registration</a>
             </li>
             <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report</a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report Format</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
-                        <a href="#r1">Review 1 Format</a>
+                        <a href="../pdf/student/firstreview.pdf">Review 1</a>
                     </li>
                     <li>
-                        <a href="#">Review 2 Format</a>
+                        <a href="../pdf/student/secondreview.pdf">Review 2</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#">Review 3 Format</a>
+                    </li> -->
+                    <li>
+                    <a href="#pageSubsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Final Report</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="../pdf/student/reportMBA.pdf">MBA</a>
                     </li>
                     <li>
-                        <a href="#">Project Report Format</a>
-                    </li>
+                        <a href="../pdf/student/reportMCA.pdf">MCA</a>
+                    </li> 
+                    </ul>   
                 </ul>
             </li>
             <li>

@@ -35,12 +35,12 @@ if(!isset($_SESSION['gid'])){
                 <a href="#homeSubmenu">Home</a>
             </li>
             <li>
-                <a href="./approve.php">Student Approve</a>
+                <a href="./approve.php">Student Approval</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">Project Registration</a>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li>
@@ -56,13 +56,14 @@ if(!isset($_SESSION['gid'])){
                         <a href="#">Project Report Format</a>
                     </li>
                 </ul>
+            </li> -->
+            <li>
+                <a href="#">View Approved Student</a>
             </li>
             <li>
-                <a href="#">View Project Status</a>
+                <a href="#">View Students Project Status</a>
             </li>
-            <li>
-                <a href="#">Profile</a>
-            </li>
+            
         </ul>
 
         <ul class="list-unstyled CTAs">

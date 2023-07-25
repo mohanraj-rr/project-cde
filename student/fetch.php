@@ -11,7 +11,7 @@ if(isset($_POST['request'])){
     
 ?>
 
-<table class="table">
+<table id="list" class="table">
     <?php
 
     if($count){
@@ -20,7 +20,7 @@ if(isset($_POST['request'])){
 
     <thead>
         <tr>
-            <th>Guide ID</th>
+            <!-- <th>Guide ID</th> -->
             <th>Guide Name</th>
             <th>Designation</th>
             <th>College Name</th>
@@ -39,7 +39,7 @@ if(isset($_POST['request'])){
         while($row = mysqli_fetch_assoc($res)){
         ?>
         <tr>
-            <td><input type="text" name="gid" value= "<?php echo $row['guideid']?>" readonly/></td>
+            <input type="hidden" name="gid" value= "<?php echo $row['guideid']?>"/></td>
             <td><?php echo $row['name']?></td>
             <td><?php echo $row['designation']?></td>
             <td><?php echo $row['college']?></td>
@@ -51,7 +51,7 @@ if(isset($_POST['request'])){
     </tbody>
 
 
-<a href="../student/logout.php">Logout</a>
+
 
 <?php
 }

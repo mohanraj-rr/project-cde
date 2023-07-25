@@ -19,12 +19,73 @@ if(!isset($_SESSION['gid'])){
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
+
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+    #list {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    #list td, #list th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+
+    #list tr:nth-child(even){background-color: #f2f2f2;}
+
+    #list tr:hover {background-color: #ddd;}
+
+    #list th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: blue;
+    color: white;
+    }
+
+</style>
+
 <body>
 	
 
 <h1 class="text-center  text-white bg-dark col-md-12">View Pending Student List</h1>
-
-<table class="table table-bordered col-md-12">
+<!-- class="table table-bordered col-md-12" -->
+<table id="list" >
   <thead>
     <tr>
       <th scope="col">Reg No</th>
@@ -47,7 +108,7 @@ while($row = mysqli_fetch_array($result))  { ?>
 
   <tbody>
     <tr>
-      <th scope="row"><?php echo $row['regno']; ?></th>
+      <td scope="row"><?php echo $row['regno']; ?></td>
       <td><?php echo $row['name']; ?></td>
       <td><?php echo $row['studycentre']; ?></td>
       <td><?php echo $row['course']; ?></td>
@@ -56,8 +117,10 @@ while($row = mysqli_fetch_array($result))  { ?>
      <td>
 		<form action="./approve.php" method="POST">
 		<input type="hidden" name="regno" value="<?php echo $row['regno']; ?>"/>
-		<input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
-		<input type="submit" name="reject" value="reject"> 
+    <button class="button button1" name="approve" value="approve">Approve</button>
+    <button class="button button3" name="reject" value="reject">Reject</button>
+		<!-- <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
+		<input type="submit" name="reject" value="reject">  -->
 
 		</form>
    </td>
@@ -72,7 +135,7 @@ while($row = mysqli_fetch_array($result))  { ?>
 if(isset($_POST['approve'])){
 
 	$regno = $_POST['regno'];
-	$select = "UPDATE `guideselection` SET `status`='Approved' WHERE `regno` = '$regno' ";
+	$select = "UPDATE `guideselection` SET `status`='Approved' WHERE `regno` = '$regno'";
 	$res = mysqli_query($conn,$select);
 	header("location:approve.php");
 }
@@ -81,7 +144,7 @@ if(isset($_POST['approve'])){
 if(isset($_POST['reject'])){
 
 	$regno = $_POST['regno'];
-	$select = "UPDATE `guideselection` SET `status`='Rejected' WHERE `regno` = '$regno'  ";
+	$select = "UPDATE `guideselection` SET `status`='Rejected' WHERE `regno` = '$regno'";
 	$res = mysqli_query($conn,$select);
 	header("location:approve.php");
 }
@@ -103,8 +166,8 @@ if(isset($_POST['reject'])){
 
  <h1 class="text-center  text-white bg-success col-md-12
 ">View Student List </h1>
-
-<table class="table table-bordered col-md-12">
+<!-- class="table table-bordered col-md-12" -->
+<table id="list" >
   <thead>
     <tr>
       <th scope="col">Reg No</th>
@@ -132,7 +195,7 @@ while($row = mysqli_fetch_array($result)) { ?>
 
   <tbody>
     <tr>
-      <th scope="row"><?php echo $row['regno']; ?></th>
+      <td scope="row"><?php echo $row['regno']; ?></td>
       <td><?php echo $row['name']; ?></td>
       <td><?php echo $row['studycentre']; ?></td>
       <td><?php echo $row['course']; ?></td>
