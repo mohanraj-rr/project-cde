@@ -192,11 +192,19 @@ if($val>0){
 
     <?php
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require '../phpmailer/src/Exception.php';
+    require '../phpmailer/src/PHPMailer.php';
+    require '../phpmailer/src/SMTP.php';
+
+
     if (isset($_POST['select']))  {
 
     $rno = $_SESSION['regno'];
     $gid = $_POST['gid'];
-    $sql = "SELECT `name`, `phoneno`, `studycentre`, `course`, `specialization` FROM `student` WHERE `regno`='$rno'";
+    $sql = "SELECT `name`, `phoneno`, `studycentre`, `course`, `specialization`,`emailid` FROM `student` WHERE `regno`='$rno'";
 
     $res = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($res);
@@ -206,6 +214,39 @@ if($val>0){
     $studycentre = $row['studycentre'];
     $course = $row['course'];
     $specialization = $row['specialization'];
+    $studemail = $row['emailid'];
+
+    $query = "SELECT `emailid` FROM `guide` WHERE `guideid`='$gid'";
+    $res = mysqli_query($conn,$query);
+    $row = mysqli_fetch_assoc($res);
+
+    $email = $row['emailid'];
+
+
+
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com'; 
+    $mail->SMTPAuth = true;
+    $mail->Username = 'mohanraj.windows.8121@gmail.com'; //from address
+    $mail->Password = 'rowmgblyxcyhools';
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+
+    $mail->setFrom('mohanraj.windows.8121@gmail.com');
+    $mail->addAddress($email);
+
+    $mail->isHTML(true);
+
+    $mail->Subject = 'From CDE Project team';
+    $mail->Body = 'Login in to guide line to select the requested students :'.$name.'-'. $studycentre.'-'.$course.'-'.$studemail.'-'.$phoneno.''.'<br>'.'<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
+    // $mail->AltBody = '<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
+    $mail->send();
+
+
+
+
+
 
     
     $query = "INSERT INTO `guideselection`(`regno`, `name`, `phoneno`, `studycentre`, `course`, `specialization`, `gid`, `status`) VALUES ('$rno','$name','$phoneno','$studycentre','$course','$specialization','$gid','Pending')";

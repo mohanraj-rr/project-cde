@@ -32,7 +32,7 @@ if(!isset($_SESSION['regno'])){
         <ul class="list-unstyled components">
             <p style="color: #fff;">Dashboard</p>
             <li class="active">
-                <a href="#homeSubmenu">Home</a>
+                <a href="./home.php">Home</a>
             </li>
             <li>
                 <a href="./guidelist.php">Guide Selection</a>

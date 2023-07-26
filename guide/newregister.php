@@ -51,6 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
           if($res){
             $success = "Signup Successfully";
+            header('location:./login.php');
             // $success = true;
           }
           else{
