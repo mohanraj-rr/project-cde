@@ -9,6 +9,18 @@ if(!isset($_SESSION['regno'])){
 
 $regno = $_SESSION['regno'];
 
+$qry = "SELECT * FROM `projectreg` WHERE `regno`='$regno'";
+
+$result = mysqli_query($conn, $qry);
+
+$num = mysqli_num_rows($result);
+
+if($num==0){
+    // echo "First register your project proposal";
+    header("location:./home.php?msg=Register your Project Proposal First");
+}
+
+
 $query = "SELECT * FROM `guideselection` WHERE `regno` = '$regno'";
 
 $res = mysqli_query($conn, $query);
@@ -25,21 +37,128 @@ if($val>0){
     $check = $status["status"];
 
     if($check == "Approved"){
-        header("location:./approved.php");
+        header("location:./home.php?msg=Your request is approved");
         // echo '<script>alert("Your request is approved!")</script>';
     }
     else if($check == "Pending"){
-        header("location:./pending.php");
+        header("location:./home.php?msg=Your request is pending");
     }
     else if($check == "Rejected"){
         //echo "You are rejected select again.";
-        echo '<script>alert("Your request is Rejected! Select a new Guide")</script>';
+        echo '<script>alert("Your request is Declined! Select a new Guide")</script>';
         $sql = "DELETE FROM `guideselection` WHERE `regno` = '$regno' AND `status` = '$check'";
         $res = mysqli_query($conn,$sql);
-
+    }
+    else if($check == "Correction Pending"){
+        header("location:./home.php?msg=Your request is coorection pending");//want to add header
     }
 }
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../phpmailer/src/Exception.php';
+require '../phpmailer/src/PHPMailer.php';
+require '../phpmailer/src/SMTP.php';
+
+
+if (isset($_GET['gid']))  {
+
+$rno = $_SESSION['regno'];
+$gid = $_GET['gid'];
+// if(isset($_GET['gid'])){
+//     $gid = $_GET['gid'];
+// }
+// else{
+//     echo "gid is missing";
+// }
+
+
+
+
+
+
+$sql = "SELECT `name`, `phoneno`, `studycentre`, `course`, `specialization`,`emailid` FROM `student` WHERE `regno`='$rno'";
+
+$res = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($res);
+
+$name = $row['name'];
+$phoneno = $row['phoneno'];
+$studycentre = $row['studycentre'];
+$course = $row['course'];
+$specialization = $row['specialization'];
+$studemail = $row['emailid'];
+
+$query = "SELECT `emailid` FROM `guide` WHERE `guideid`='$gid'";
+$res = mysqli_query($conn,$query);
+$row = mysqli_fetch_assoc($res);
+
+$email = $row['emailid'];
+
+
+$query = "SELECT COUNT(`gid`) AS `nguide` FROM `guideselection` WHERE `gid` = '$gid'";
+$res = mysqli_query($conn, $query);
+
+
+if($res){
+    $nguide = mysqli_fetch_assoc($res);
+
+    $val = $nguide['nguide'];
+    if($val>2){
+        
+        header('location: ./guidelist.php?msg='.$gid);
+        
+    }
+    else{
+
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; 
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mohanraj.windows.8121@gmail.com'; //from address
+        $mail->Password = 'rowmgblyxcyhools';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        $mail->setFrom('mohanraj.windows.8121@gmail.com');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+
+        $mail->Subject = 'From CDE Project team';
+        $mail->Body = 'Login in to guide line to select the requested students :'.$name.'-'. $studycentre.'-'.$course.'-'.$studemail.'-'.$phoneno.''.'<br>'.'<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
+        $mail->AltBody = '<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
+        $mail->send();
+
+        $query = "INSERT INTO `guideselection`(`regno`, `name`, `phoneno`, `studycentre`, `course`, `specialization`, `gid`, `status`) VALUES ('$rno','$name','$phoneno','$studycentre','$course','$specialization','$gid','Pending')";
+
+        $sub = mysqli_query($conn,$query);
+            
+            if($sub){
+    
+            // echo "your request is  under process! ";
+            // echo "<script>window.location.href='home.php?msg=your guide selection request send to corresponding guide;</script>";  
+
+            header('location: ./home.php?msg=your guide selection request send to corresponding guide');
+            
+    
+    
+            }
+            else
+            {
+            echo "something went wrong ! ";
+            } 
+
+    }
+   
+}
+
+
+
+
+
+} 
 
 ?>
 
@@ -117,10 +236,16 @@ if($val>0){
   </style>
 </head>
 <body>
+    <?php
+    if(isset($_GET['msg'])){
+        echo "<script>alert('Same Guide Selected N times, So Select Another Guide')</script>";
+    }
+    ?>
 
     <h1 class="text-center text-success mt-5">Welcome
     <?php echo $_SESSION['regno']; ?>
     </h1>
+
 
 
     <div id="filter">
@@ -134,7 +259,7 @@ if($val>0){
         </select>
     </div>
     
-    <form action="" method="post"> 
+     
     <div class="container">
         <table id="list" class="table">
             <thead>
@@ -163,7 +288,7 @@ if($val>0){
         </table>
         <a href="../student/home.php">home</a>
     </div>
-    </form>
+    
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -192,79 +317,7 @@ if($val>0){
 
     <?php
 
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
 
-    require '../phpmailer/src/Exception.php';
-    require '../phpmailer/src/PHPMailer.php';
-    require '../phpmailer/src/SMTP.php';
-
-
-    if (isset($_POST['select']))  {
-
-    $rno = $_SESSION['regno'];
-    $gid = $_POST['gid'];
-    $sql = "SELECT `name`, `phoneno`, `studycentre`, `course`, `specialization`,`emailid` FROM `student` WHERE `regno`='$rno'";
-
-    $res = mysqli_query($conn,$sql);
-    $row = mysqli_fetch_assoc($res);
-
-    $name = $row['name'];
-    $phoneno = $row['phoneno'];
-    $studycentre = $row['studycentre'];
-    $course = $row['course'];
-    $specialization = $row['specialization'];
-    $studemail = $row['emailid'];
-
-    $query = "SELECT `emailid` FROM `guide` WHERE `guideid`='$gid'";
-    $res = mysqli_query($conn,$query);
-    $row = mysqli_fetch_assoc($res);
-
-    $email = $row['emailid'];
-
-
-
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com'; 
-    $mail->SMTPAuth = true;
-    $mail->Username = 'mohanraj.windows.8121@gmail.com'; //from address
-    $mail->Password = 'rowmgblyxcyhools';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
-
-    $mail->setFrom('mohanraj.windows.8121@gmail.com');
-    $mail->addAddress($email);
-
-    $mail->isHTML(true);
-
-    $mail->Subject = 'From CDE Project team';
-    $mail->Body = 'Login in to guide line to select the requested students :'.$name.'-'. $studycentre.'-'.$course.'-'.$studemail.'-'.$phoneno.''.'<br>'.'<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
-    // $mail->AltBody = '<a href="http://localhost/git_project/project-cde/guide/login.php">Click to Guide login</a>';
-    $mail->send();
-
-
-
-
-
-
-    
-    $query = "INSERT INTO `guideselection`(`regno`, `name`, `phoneno`, `studycentre`, `course`, `specialization`, `gid`, `status`) VALUES ('$rno','$name','$phoneno','$studycentre','$course','$specialization','$gid','Pending')";
-
-    $sub = mysqli_query($conn,$query);
-        
-        if($sub>0){
-
-        echo "your request is  under process! ";
-        echo "<script>window.location.href='home.php';</script>";  
-
-        }
-        else
-        {
-
-        echo "something went wrong ! ";
-        }   
-    } 
 
     ?>
 </body>

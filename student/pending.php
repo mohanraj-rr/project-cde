@@ -38,7 +38,7 @@ if(!isset($_SESSION['regno'])){
                 <a href="./guidelist.php">Guide Selection</a>
             </li>
             <li>
-                <a href="#">Project Registration</a>
+                <a href="./projectreg.php">Project Registration</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report Format</a>

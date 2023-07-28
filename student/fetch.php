@@ -39,11 +39,11 @@ if(isset($_POST['request'])){
         while($row = mysqli_fetch_assoc($res)){
         ?>
         <tr>
-            <input type="hidden" name="gid" value= "<?php echo $row['guideid']?>"/></td>
+            <!-- <td><input name="gid" value= "<?php //echo $row['guideid']?>"/></td> -->
             <td><?php echo $row['name']?></td>
             <td><?php echo $row['designation']?></td>
             <td><?php echo $row['college']?></td>
-            <td><button class="button button1" name="select" type="submit">SELECT</button></td>
+            <td><a href="./guidelist.php?gid=<?php echo $row['guideid']?>"><button class="button button1" name="select" type="submit">SELECT</button></a></td>
             <!-- <td><button type="submit" name="select">Select</button></td> -->
         </tr>
         <?php    

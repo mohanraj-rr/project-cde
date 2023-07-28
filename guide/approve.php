@@ -45,6 +45,16 @@ if(!isset($_SESSION['gid'])){
   background-color: #4CAF50;
   color: white;
 }
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #FEE12B;
+}
+
+.button2:hover {
+  background-color: #FEE12B;
+  color: brown;
+}
 .button3 {
   background-color: white; 
   color: black; 
@@ -117,8 +127,9 @@ while($row = mysqli_fetch_array($result))  { ?>
      <td>
 		<form action="./approve.php" method="POST">
 		<input type="hidden" name="regno" value="<?php echo $row['regno']; ?>"/>
-    <button class="button button1" name="approve" value="approve">Approve</button>
-    <button class="button button3" name="reject" value="reject">Reject</button>
+    <button class="button button1" name="approve" value="approve">Approve</button>    
+    <button class="button button2" name="crtpending" value="crtpending">Correction Pending</button>
+    <button class="button button3" name="reject" value="reject">Decline</button>
 		<!-- <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
 		<input type="submit" name="reject" value="reject">  -->
 
@@ -145,6 +156,14 @@ if(isset($_POST['reject'])){
 
 	$regno = $_POST['regno'];
 	$select = "UPDATE `guideselection` SET `status`='Rejected' WHERE `regno` = '$regno'";
+	$res = mysqli_query($conn,$select);
+	header("location:approve.php");
+}
+
+if(isset($_POST['crtpending'])){
+
+	$regno = $_POST['regno'];
+	$select = "UPDATE `guideselection` SET `status`='Correction Pending' WHERE `regno` = '$regno'";
 	$res = mysqli_query($conn,$select);
 	header("location:approve.php");
 }

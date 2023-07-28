@@ -35,10 +35,10 @@ if(!isset($_SESSION['regno'])){
                 <a href="./home.php">Home</a>
             </li>
             <li>
-                <a href="./guidelist.php">Guide Selection</a>
+                <a href="./projectreg.php">Project Registration</a>
             </li>
             <li>
-                <a href="#">Project Registration</a>
+                <a href="./guidelist.php">Guide Selection</a>
             </li>
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report Format</a>
@@ -119,7 +119,17 @@ if(!isset($_SESSION['regno'])){
             </div>
         </nav>
 
-        <h2 style="text-align: center;">Welcome to Student Section</h2>
+        <h2 style="text-align: center;">Welcome to Student Section</h2><br>
+        <?php
+        if(isset($_GET['msg'])){
+            $msg = $_GET['msg'];
+            echo '<h2 style="text-align: center;">'.$msg.'</h2>';
+        }
+        else{
+            echo '<h2 style="text-align: center;">First Register Your Project Proposal Then Select Your Guide!!!</h2>';
+        }
+        ?>
+        
         
     </div>
 </div>
