@@ -104,7 +104,8 @@ if(!isset($_SESSION['gid'])){
 	    <th scope="col">Course</th>
 	    <th scope="col">Specialization</th>
       <th scope="col">Phone No</th>
-      <th scope="col">Status</th>
+      <th scope="col">Project Proposal</th>
+      <th scope='col'>Status</th>
     </tr>
   </thead>
 
@@ -123,7 +124,8 @@ while($row = mysqli_fetch_array($result))  { ?>
       <td><?php echo $row['studycentre']; ?></td>
       <td><?php echo $row['course']; ?></td>
       <td><?php echo $row['specialization']; ?></td>  
-      <td><?php echo $row['phoneno']; ?></td>  
+      <td><?php echo $row['phoneno']; ?></td> 
+      <td><a href="../genPDF/generatePDF.php?regno=<?php echo $row['regno']?>">Preview</a></td> 
      <td>
 		<form action="./approve.php" method="POST">
 		<input type="hidden" name="regno" value="<?php echo $row['regno']; ?>"/>

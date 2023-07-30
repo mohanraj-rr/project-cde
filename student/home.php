@@ -68,6 +68,9 @@ if(!isset($_SESSION['regno'])){
                 <a href="#">View Project Status</a>
             </li>
             <li>
+                <a href="./correctproject.php">Project Correction</a>
+            </li>
+            <li>
                 <a href="#">Profile</a>
             </li>
         </ul>

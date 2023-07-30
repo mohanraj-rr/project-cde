@@ -50,7 +50,7 @@ if($val>0){
         $res = mysqli_query($conn,$sql);
     }
     else if($check == "Correction Pending"){
-        header("location:./home.php?msg=Your request is coorection pending");//want to add header
+        header("location:./home.php?msg=Your request is correction pending");//want to add header
     }
 }
 
@@ -105,9 +105,9 @@ if($res){
     $nguide = mysqli_fetch_assoc($res);
 
     $val = $nguide['nguide'];
-    if($val>2){
+    if($val>5){
         
-        header('location: ./guidelist.php?msg='.$gid);
+        header('location:./guidelist.php?msg='.$gid);
         
     }
     else{
@@ -140,7 +140,7 @@ if($res){
             // echo "your request is  under process! ";
             // echo "<script>window.location.href='home.php?msg=your guide selection request send to corresponding guide;</script>";  
 
-            header('location: ./home.php?msg=your guide selection request send to corresponding guide');
+            header('location: ./home.php?msg=your guide selection request sent to corresponding guide');
             
     
     
