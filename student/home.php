@@ -64,9 +64,9 @@ if(!isset($_SESSION['regno'])){
                     </ul>   
                 </ul>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">View Project Status</a>
-            </li>
+            </li> -->
             <li>
                 <a href="./correctproject.php">Project Correction</a>
             </li>
@@ -90,7 +90,7 @@ if(!isset($_SESSION['regno'])){
 
                 <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color:rgb(15, 171, 223)">
                     <i class="fas fa-align-left"></i>
-                    <span style="color: white;">Move</span>
+                    <span style="color: white;">=</span>
                 </button>
                 <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-align-justify"></i>
@@ -127,6 +127,10 @@ if(!isset($_SESSION['regno'])){
         if(isset($_GET['msg'])){
             $msg = $_GET['msg'];
             echo '<h2 style="text-align: center;">'.$msg.'</h2>';
+            
+            if($_GET['msg']=='Your request is approved'){
+                echo "<a href='../genPDF/FinalPDF.php'>Download</a>";
+            }
         }
         else{
             echo '<h2 style="text-align: center;">First Register Your Project Proposal Then Select Your Guide!!!</h2>';

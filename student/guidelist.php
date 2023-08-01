@@ -43,7 +43,7 @@ if($val>0){
     else if($check == "Pending"){
         header("location:./home.php?msg=Your request is pending");
     }
-    else if($check == "Rejected"){
+    else if($check == "Declined"){
         //echo "You are rejected select again.";
         echo '<script>alert("Your request is Declined! Select a new Guide")</script>';
         $sql = "DELETE FROM `guideselection` WHERE `regno` = '$regno' AND `status` = '$check'";

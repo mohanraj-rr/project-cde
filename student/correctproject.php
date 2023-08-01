@@ -10,7 +10,6 @@ $res = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_assoc($res);
 if($rows){
     $check = $rows['status'];
-
     echo $check;
     if($check == 'Correction Pending'){
         $query = "SELECT * FROM `projectreg` WHERE `regno`='$rno'"; 
@@ -180,8 +179,14 @@ if($rows){
     // </script>";
 
     }
-    else{
-        header("location: ./home.php?msg=wait");
+    else if($check == 'Pending'){
+        header("location: ./home.php?msg=Wait for Guide Response");
+    }
+    else if($check == 'Approved'){
+        header("location:./home.php?msg=Your request is approved");
+    }
+    else if($check == 'Declined'){
+        header("location:./home.php?msg=Your request is Declined, Select a new Guide");
     }
 }
 else{
@@ -207,7 +212,7 @@ if(isset($_POST["submit"])){
         $sql="UPDATE `guideselection` SET `status`='Pending' WHERE `regno` = '$regno'";
         $res = mysqli_query($conn,$sql);
         echo "<script>
-        window.location = './home.php?msg=wait';
+        window.location = './home.php?msg=Wait for Guide Response';
         </script>";
         //echo "Updated Successfully";
     }

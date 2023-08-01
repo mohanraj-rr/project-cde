@@ -1,16 +1,14 @@
 <?php 
-  session_status();
-  if(!isset($_SESSION['gid'])){
-    echo "Error";
+  session_start();
+  if(!isset($_SESSION['regno'])){
+    echo "Error!";
   }
 
   require '../connect.php';
 
-  require_once('../genPDF/dompdf/autoload.inc.php');
+  require_once('./dompdf/autoload.inc.php');
 
   use Dompdf\Dompdf;
-
-  if(isset($_GET['regno'])){
   
       // $conn = new PDO('mysql:host=localhost;dbname=project_database','root','');
   
@@ -19,11 +17,25 @@
       // $stmt->execute();
       // $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   
-      $rno = $_GET['regno'];
+      $rno = $_SESSION['regno'];
 
-      $sql = "SELECT * FROM `projectreg` WHERE `regno`='$rno'";
+      $sql1 = "SELECT * FROM `projectreg` WHERE `regno`='$rno'";
   
-      $res = mysqli_query($conn, $sql);
+      $res1 = mysqli_query($conn, $sql1);
+
+      $sql2 = "SELECT `gid` FROM `guideselection` WHERE `regno`='$rno'";
+
+      $res2 = mysqli_query($conn, $sql2);
+
+      $row = mysqli_fetch_array($res2);
+
+      $gid = $row['gid'];
+
+      $sql3 = "SELECT `name`, `designation`, `college`, `emailid`, `phoneno` FROM `guide` WHERE `guideid`='$gid'";
+
+      $res3 = mysqli_query($conn, $sql3);
+
+    
   
       $gt = 0;
       $i = 1;
@@ -55,7 +67,7 @@
         </head>
         <body>';
   
-      while($row = mysqli_fetch_assoc($res)){
+      while($row = mysqli_fetch_assoc($res1)){
           $html .= '<h2>Project CDE</h2>
           <table>
             <tbody>
@@ -92,10 +104,31 @@
                 <td>'.$row['swapps'].'</td>
               </tr>
             </tbody>
-          </table>
-        </body>
-      </html>';
+          </table>';
       }
+
+      while($row = mysqli_fetch_assoc($res3)){
+        $html .= '<h2>Guide Details</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>Guide Name</th>
+              <td>'.$row['name'].'</td>
+            </tr>
+            <tr>
+              <th>Guide Designation</th>
+              <td>'.$row['designation'].'</td>
+            </tr>
+            <tr>
+              <th>College</th>
+              <td>'.$row['college'].'</td>
+            </tr>
+            <tr>
+              <th>Email-id</th>
+              <td>'.$row['emailid'].'</td>
+            </tr>
+          </tbody>
+        </table>';}
   
       $dompdf = new Dompdf();
       $dompdf->loadHtml($html);
@@ -104,7 +137,6 @@
       $fname = $rno.'-project.pdf';
       $dompdf->stream($fname);
 
-  }
 
 
 ?>

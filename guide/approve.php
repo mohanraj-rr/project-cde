@@ -131,7 +131,7 @@ while($row = mysqli_fetch_array($result))  { ?>
 		<input type="hidden" name="regno" value="<?php echo $row['regno']; ?>"/>
     <button class="button button1" name="approve" value="approve">Approve</button>    
     <button class="button button2" name="crtpending" value="crtpending">Correction Pending</button>
-    <button class="button button3" name="reject" value="reject">Decline</button>
+    <button class="button button3" name="decline" value="decline">Decline</button>
 		<!-- <input type="submit" name="approve" value="approve"> &nbsp &nbsp <br>
 		<input type="submit" name="reject" value="reject">  -->
 
@@ -154,10 +154,10 @@ if(isset($_POST['approve'])){
 }
 
 
-if(isset($_POST['reject'])){
+if(isset($_POST['decline'])){
 
 	$regno = $_POST['regno'];
-	$select = "UPDATE `guideselection` SET `status`='Rejected' WHERE `regno` = '$regno'";
+	$select = "UPDATE `guideselection` SET `status`='Declined' WHERE `regno` = '$regno'";
 	$res = mysqli_query($conn,$select);
 	header("location:approve.php");
 }
