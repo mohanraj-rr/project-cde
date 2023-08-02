@@ -71,7 +71,7 @@
             }
           </style>
         </head>
-        <body>';
+        <body> <h2>'.$studname.'</h2>';
   
       while($row = mysqli_fetch_assoc($res1)){
           $html .= '<h2>Project CDE</h2>
