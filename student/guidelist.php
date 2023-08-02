@@ -105,7 +105,7 @@ if($res){
     $nguide = mysqli_fetch_assoc($res);
 
     $val = $nguide['nguide'];
-    if($val>5){
+    if($val>2){
         
         header('location:./guidelist.php?msg='.$gid);
         
@@ -294,12 +294,18 @@ if($res){
         $(document).ready(function(){
             $("#fetchval").on('change',function(){
                 var value = $(this).val();
+
+                const mykeyValues = window.location.search;
+                const urlParams = new URLSearchParams(mykeyValues);
+
+                const params1 = urlParams.get('msg');
+                console.log(params1);
                 //alert(value);
 
                 $.ajax({
                     url: "fetch.php",
                     type: "POST",
-                    data : 'request='+ value,
+                    data : {request : value, gid: params1},
 
                     beforeSend:function(){
                         $(".container").html("<span>Working on...</span>");

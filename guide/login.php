@@ -120,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           ?>
         </p>
 
-        <div class="pass"><a href="forgotpassword.php" style="text-decoration:none;">Forgot password?</a></div>
+        <div class="pass"><a href="./forgotpwd/forgotpwd.php" style="text-decoration:none;">Forgot password?</a></div>
         <input type="submit" style="background-color: #2691d9;" value="Login">
         <br/>
         <br/>

@@ -35,7 +35,10 @@ if(!isset($_SESSION['gid'])){
                 <a href="#homeSubmenu">Home</a>
             </li>
             <li>
-                <a href="./approve.php">Student Approval</a>
+                <a href="./approve.php">Student Approval & View Students Project Status</a>
+            </li>
+            <li>
+                <a href="./profile.php">Profile</a>
             </li>
             <!-- <li>
                 <a href="#">Project Registration</a>
@@ -57,12 +60,12 @@ if(!isset($_SESSION['gid'])){
                     </li>
                 </ul>
             </li> -->
-            <li>
+            <!-- <li>
                 <a href="#">View Approved Student</a>
             </li>
             <li>
                 <a href="#">View Students Project Status</a>
-            </li>
+            </li> -->
             
         </ul>
 

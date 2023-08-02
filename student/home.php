@@ -71,7 +71,7 @@ if(!isset($_SESSION['regno'])){
                 <a href="./correctproject.php">Project Correction</a>
             </li>
             <li>
-                <a href="#">Profile</a>
+                <a href="./profile.php">Profile</a>
             </li>
         </ul>
 

@@ -3,6 +3,10 @@ if(isset($_POST['request'])){
     include('../connect.php');   
     $req = $_POST['request'];
 
+    if(isset($_POST['gid'])){
+
+    }
+
     $query = "SELECT * FROM `guide` WHERE `college` = '$req'";
 
     $res = mysqli_query($conn, $query);
@@ -37,6 +41,25 @@ if(isset($_POST['request'])){
     <tbody>
         <?php
         while($row = mysqli_fetch_assoc($res)){
+            if(isset($_POST['gid'])){
+                $gid = $_POST['gid'];
+                $rowgid = $row['guideid'];
+                if($rowgid == $gid){
+        ?>
+
+        <tr>
+            <!-- <td><input name="gid" value= "<?php //echo $row['guideid']?>"/></td> -->
+            <td><?php echo $row['name']?></td>
+            <td><?php echo $row['designation']?></td>
+            <td><?php echo $row['college']?></td>
+            <td><a href="./guidelist.php?gid=<?php echo $row['guideid']?>"><button class="button button1" name="select" type="submit" disabled>SELECT</button></a></td>
+            <!-- <td><button type="submit" name="select">Select</button></td> -->
+        </tr>
+
+        <?php
+                break;
+                }
+            }
         ?>
         <tr>
             <!-- <td><input name="gid" value= "<?php //echo $row['guideid']?>"/></td> -->
@@ -50,7 +73,7 @@ if(isset($_POST['request'])){
         }
         ?>
     </tbody>
-
+    <a href="../student/home.php">home</a>    
 
 
 
