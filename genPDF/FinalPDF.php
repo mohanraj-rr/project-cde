@@ -27,7 +27,7 @@
 
       $res2 = mysqli_query($conn, $sql2);
 
-      $row = mysqli_fetch_array($res2);
+      $row = mysqli_fetch_assoc($res2);
 
       $gid = $row['gid'];
 
@@ -35,7 +35,13 @@
 
       $res3 = mysqli_query($conn, $sql3);
 
-    
+      $sql4 = "SELECT `name` FROM `student` WHERE `regno`='$rno'";
+      
+      $res4 = mysqli_query($conn,$sql4);
+
+      $row1 = mysqli_fetch_assoc($res4);
+
+      $studname = $row1['name'];
   
       $gt = 0;
       $i = 1;
