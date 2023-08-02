@@ -88,9 +88,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       // }
       ?>
     </p> -->
+
     
+    <?php
+        if(isset($_GET['msg'])){
+          $stm = $_GET['msg'];
+          echo "<h4 align='center'>$stm</h4>";
+        }
+      ?>
     <div class="center"style="box-shadow: 2px 4px 8px #2691d9;">
       <h1 style="color:#2691d9;">Student Login</h1>
+      
       <form method="post" action="login.php">
         <div class="txt_field">
           <input type="text" placeholder="Register Number" name="regno" value="<?php if(isset($error)){ echo "$rno";} ?>" />
@@ -114,7 +122,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           ?>
         </p>
 
-        <div class="pass"><a href="forgotpassword.php" style="text-decoration:none;">Forgot password?</a></div>
+        <div class="pass"><a href="./forgotpwd/forgotpwd.php" style="text-decoration:none;">Forgot password?</a></div>
         <input type="submit" style="background-color: #2691d9;" value="Login">
         <br/>
         <br/>
