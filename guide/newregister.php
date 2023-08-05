@@ -80,6 +80,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/frontStyle.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -101,10 +102,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../index.html">HOME</a></li>
-            <li><a href="../index.html">SERVICE</a></li>
-            <li><a href="../index.html">CONTACT</a></li>
-            <li><a href="../index.html">ABOUTUS</a></li>
+            <li><a href="../index.html" style="font-weight: bolder;">HOME</a></li>
+            <li><a href="../index.html" style="font-weight: bolder;">SERVICE</a></li>
+            <li><a href="../index.html" style="font-weight: bolder;">CONTACT</a></li>
+            <li><a href="../index.html" style="font-weight: bolder;">ABOUTUS</a></li>
         </ul>
         </div>
     </div>
@@ -146,7 +147,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="txt_field">
           <input type="password" placeholder="Confirm Password" name="cpwd"/>
           <span></span>
-          <label>Password</label>
+          <label>Confirm Password</label>
         </div>
 
         <p style="color: red;">
@@ -172,18 +173,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.js"></script>
-<!--     
-    <footer class="container-fluid bg-4 text-center">
 
-    <p>Developed By Integrated M.Sc, ComputerScience Students</p>
-    <div class="container" id="tag" style="background-color:  rgb(117, 209, 240);">
-    <a href="#"><i class="fa fa-facebook"></i></a>
-    <a href="#"><i class="fa fa-twitter"></i></a>
-    <a href="#"><i class="fa fa-linkedin"></i></a>
-    <a href="#"><i class="fa fa-google-plus"></i></a>
-    <a href="#"><i class="fa fa-skype"></i></a>
-    </div>
-    </footer> -->
+    
+<footer>
+  <div class="footer">
+      <p>Developed By Integrated M.Sc., CS and IT Students</p>
+      <ul class="socials">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-github"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram "></i></a></li>
+      </ul>
+</footer>
 
 
   </body>
@@ -203,7 +205,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   }
   .center{
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
@@ -296,4 +298,55 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   .signup_link a:hover{
     text-decoration: underline;
   }
+
+  
+  /*Footer*/
+
+footer{
+	position: absolute;
+	bottom: 0;
+	background: dodgerblue;
+	height: auto;
+	width: 100vw;
+	padding: 1px 0 0 0;
+}
+/*content*/
+.footer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+.footer p{
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 16px;
+}
+/*social -media*/
+.socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+    border: 1.1px solid white;
+    padding: 5px;
+    border-radius: 50%;
+}
+.socials a i{
+    font-size: 1.3rem;
+    width: 20px;
+    transition: color .4s ease;
+}
+.socials a:hover i{
+    color: blue;
+}
 </style>

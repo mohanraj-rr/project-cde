@@ -232,6 +232,20 @@ if($res){
     background-color: #4CAF50;
     color: white;
     }
+    .btn {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      font-weight: bolder;
+      padding: 12px 30px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+/* Darker background on mouse-over */
+     .btn:hover {
+      background-color: Blue;
+}
 
   </style>
 </head>
@@ -286,7 +300,8 @@ if($res){
                 ?>
             </tbody>
         </table>
-        <a href="../student/home.php">home</a>
+        <hr>
+        <a href="./home.php"><button class="btn" style="width:100%">Home</button></a>
     </div>
     
 
@@ -319,7 +334,6 @@ if($res){
         });
 
     </script>
-
 
     <?php
 

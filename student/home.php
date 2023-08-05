@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <?php
 
 session_start();
@@ -129,7 +131,8 @@ if(!isset($_SESSION['regno'])){
             echo '<h2 style="text-align: center;">'.$msg.'</h2>';
             
             if($_GET['msg']=='Your request is approved'){
-                echo "<a href='../genPDF/FinalPDF.php'>Download</a>";
+                echo "<hr>";
+                echo "<a href='../genPDF/FinalPDF.php'><button class='btn' style='width:100%'><i class='fa fa-download'></i> Download</button></a>";
             }
         }
         else{
@@ -140,7 +143,21 @@ if(!isset($_SESSION['regno'])){
         
     </div>
 </div>
+<style>
+    .btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
+}
 
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>
 <script> 
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
