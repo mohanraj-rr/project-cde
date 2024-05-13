@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <?php 
 include("../connect.php");  
 session_start();
@@ -87,7 +89,20 @@ if(!isset($_SESSION['gid'])){
     background-color: blue;
     color: white;
     }
+    .btn {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      font-weight: bolder;
+      padding: 12px 30px;
+      cursor: pointer;
+      font-size: 20px;
+    }
 
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: Blue;
+}
 </style>
 
 <body>
@@ -125,7 +140,8 @@ while($row = mysqli_fetch_array($result))  { ?>
       <td><?php echo $row['course']; ?></td>
       <td><?php echo $row['specialization']; ?></td>  
       <td><?php echo $row['phoneno']; ?></td> 
-      <td><a href="../genPDF/generatePDF.php?regno=<?php echo $row['regno']?>">Preview</a></td> 
+      <td><a href="../genPDF/generatePDF.php?regno=<?php echo $row['regno']?>"><i style="font-size:22px" class="fa fa-eye">Preview</i>
+</a></td> 
      <td>
 		<form action="./approve.php" method="POST">
 		<input type="hidden" name="regno" value="<?php echo $row['regno']; ?>"/>
@@ -225,10 +241,10 @@ while($row = mysqli_fetch_array($result)) { ?>
       <td><?php echo $row['status']; ?></td>
     </tr>
   </tbody>
-
   <?php } ?>
 
 </table>
-<a href="./home.php">Home</a>
+<hr>
+<a href="./home.php"><button class='btn' style='width:100%'>Home</button></a>
 </body>
 </html>
